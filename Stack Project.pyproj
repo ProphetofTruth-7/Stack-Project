@@ -4,7 +4,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>5c21b0bd-625d-46f5-b161-f8157b69d66d</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>Unittests\test_stack.py</StartupFile>
+    <StartupFile>infix_converter.py</StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
