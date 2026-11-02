@@ -11,12 +11,33 @@ class InfixtoPostfixConverter:
 
         tokens = expression.split()
 
-        for token in tokens:
-            if token in OPERATOR_SET:
-                print("AMONGUS")
+        for current_token in tokens:
+            if current_token not in self.OPERATOR_SET and current_token not in ("(", ")"):
+                output.append(current_token)
+            elif current_token == "(":
+                operator_stack.push(current_token)
+            elif current_token == ")":
+                while not operator_stack.is_empty() and operator_stack.peek() != "(":
+                    output.append(operator_stack.pop())
+                if operator_stack.is_empty(): # Only checks after the loop clears out everything. If the stack is empty, then there was no proper paranthesis handling
+                    raise ValueError("Incorrect closing paranthesis")
+                operator_stack.pop()  # Removes the ( from the stack last, ensuring it doesn't affect future work
             else:
-                print("NADA")
+                while not operator_stack.is_empty() and current_token in self.OPERATOR_SET:
+                    if self.PRECEDENCE_SET[operator_stack.peek()] >= self.PRECEDENCE_SET[current_token]:
+                        output.append(operator_stack.pop())
+                    else:
+                        break
+                operator_stack.push(current_token)
+
+        while not operator_stack.is_empty():
+            top = operator_stack.pop()
+            if top == "(":
+                raise ValueError("Mismatched parentheses")
+            output.append(top)
+        return " ".join(output)
 
 
-    expression = "A + B * C - D"
-    print(infix_to_postfix(expression))
+converter = InfixtoPostfixConverter()
+expression = "A + B * C - D"
+print(converter.infix_to_postfix(expression))
