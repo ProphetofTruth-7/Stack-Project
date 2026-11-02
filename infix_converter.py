@@ -3,7 +3,7 @@ from stack import Stack
 class InfixtoPostfixConverter:
 
     OPERATOR_SET = {"+", "-", "*", "/", "^"}
-    PRECEDENCE_SET = {"+":1, "-":1, "*":2, "/":2, "^":3}
+    PRECEDENCE_SET = {"+":3, "-":3, "*":2, "/":2, "^":1}
 
     def infix_to_postfix(self, expression: str):
         output = []
@@ -23,8 +23,8 @@ class InfixtoPostfixConverter:
                     raise ValueError("Incorrect closing paranthesis")
                 operator_stack.pop()  # Removes the ( from the stack last, ensuring it doesn't affect future work
             else:
-                while not operator_stack.is_empty() and current_token in self.OPERATOR_SET:
-                    if self.PRECEDENCE_SET[operator_stack.peek()] >= self.PRECEDENCE_SET[current_token]:
+                while not operator_stack.is_empty() and current_token in self.OPERATOR_SET:   #The current_token is compared with each operator in the stack until it is of greater/equal predence to the operator. Then it is added to the stack
+                    if self.PRECEDENCE_SET[operator_stack.peek()] <= self.PRECEDENCE_SET[current_token]:
                         output.append(operator_stack.pop())
                     else:
                         break
@@ -39,5 +39,5 @@ class InfixtoPostfixConverter:
 
 
 converter = InfixtoPostfixConverter()
-expression = "A + B * C - D"
+expression = "(A+B) - D * C"
 print(converter.infix_to_postfix(expression))
