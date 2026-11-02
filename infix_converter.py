@@ -23,7 +23,7 @@ class InfixtoPostfixConverter:
                     raise ValueError("Incorrect closing paranthesis")
                 operator_stack.pop()  # Removes the ( from the stack last, ensuring it doesn't affect future work
             else:
-                while not operator_stack.is_empty() and current_token in self.OPERATOR_SET:   #The current_token is compared with each operator in the stack until it is of greater/equal predence to the operator. Then it is added to the stack
+                while not operator_stack.is_empty() and operator_stack.peek() in self.OPERATOR_SET and current_token in self.OPERATOR_SET:   #The current_token is compared with each operator in the stack until it is of greater/equal predence to the operator. Then it is added to the stack
                     if self.PRECEDENCE_SET[operator_stack.peek()] <= self.PRECEDENCE_SET[current_token]:
                         output.append(operator_stack.pop())
                     else:
@@ -39,5 +39,5 @@ class InfixtoPostfixConverter:
 
 
 converter = InfixtoPostfixConverter()
-expression = "(A+B) - D * C"
+expression = " ( A + B ) - D * C"
 print(converter.infix_to_postfix(expression))
