@@ -36,8 +36,3 @@ class InfixtoPostfixConverter:
                 raise ValueError("Mismatched parentheses")
             output.append(top)
         return " ".join(output)
-
-
-converter = InfixtoPostfixConverter()
-expression = " ( ( A ^ K * A ) + B ) - D * C"
-print(converter.infix_to_postfix(expression))
