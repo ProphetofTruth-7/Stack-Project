@@ -14,3 +14,11 @@ class Stack:
         if self.is_empty():
             raise IndexError("Cannot remove from empty Stack")
         return self.items.pop()
+
+    def peek(self):
+        if self.is_empty():
+            raise IndexError("Cannot inspect an empty Stack")
+        return self.items[-1]
+
+    def size(self):
+        return len(self.items)
