@@ -14,6 +14,7 @@ print(f"Removing {airport_queue.peek()}")
 airport_queue.pop()
 print()
 
+
 print(airport_queue.items)
 print(f"There are {airport_queue.size()} flights in the queue")
 print()
