@@ -10,6 +10,7 @@ class Stack:
             return True
         return False
 
+
     def pop(self):
         if self.is_empty():
             raise IndexError("Cannot remove from empty Stack")
