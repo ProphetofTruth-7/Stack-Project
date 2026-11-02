@@ -39,5 +39,5 @@ class InfixtoPostfixConverter:
 
 
 converter = InfixtoPostfixConverter()
-expression = " ( A + B ) - D * C"
+expression = " ( ( A ^ K * A ) + B ) - D * C"
 print(converter.infix_to_postfix(expression))
