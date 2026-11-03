@@ -1,7 +1,7 @@
 from stack import Stack
 from infix_converter import InfixtoPostfixConverter
 
-class PostfixCalculator(self, expression):
+class PostfixCalculator:
     def __init__(self):
         self.converter = InfixtoPostfixConverter()
 
@@ -13,15 +13,18 @@ class PostfixCalculator(self, expression):
         calculation_stack = Stack()
 
         for current_token in converted_expression.split():
-            if token.isalnum():
-                calculation_stack.push(current_token)
+            if current_token.isalnum():
+                if current_token.isdigit():
+                    calculation_stack.push(int(current_token))
+                else:
+                    calculation_stack.push(current_token)
             else:
-                right_operand = value_stack.pop()
-                left_operand = value_stack.pop()
+                right_operand = calculation_stack.pop()
+                left_operand = calculation_stack.pop()
 
                 result = self.calculate(left_operand, current_token, right_operand)
-                value_stack.push(result)
-        return value_stack.pop()  #Should be the final, calculated answer
+                calculation_stack.push(result)
+        return calculation_stack.pop()  #Should be the final, calculated answer
 
     def calculate(self, left_operand, operator, right_operand):
         if operator == "+":
@@ -30,5 +33,12 @@ class PostfixCalculator(self, expression):
             return left_operand - right_operand
         if operator == "*":
             return left_operand * right_operand
-        if operator = "/":
+        if operator == "/":
             return left_operand / right_operand
+        if operator == "^":
+            return left_operand ** right_operand
+
+action_stack = PostfixCalculator()
+expression = "5 ^ 2 * ( 2 + 3 )"
+
+print(action_stack.convert_and_action_expression(expression))
