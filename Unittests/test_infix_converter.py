@@ -41,7 +41,13 @@ class TestInfixConverter(unittest.TestCase):
         expression = "( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( A + B ) ) ) ) ) ) ) ) ) ) ) ) ) ) ) ) ) ) ) ) ) ) ) ) ) )"
         self.assertEqual(self.test_converter.infix_to_postfix(expression), "A B +")
     def test_malformed_1(self):
-        with 
+        with self.assertRaises(ValueError):
+            expression = "A + B )"
+            self.test_converter.infix_to_postfix(expression)
+    def test_malformed_2(self):
+        with self.assertRaises(ValueError):
+            expression = "A + B ; C"
+            self.test_converter.infix_to_postfix(expression)
 
 
 if __name__ == "__main__":
