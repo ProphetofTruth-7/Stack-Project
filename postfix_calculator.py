@@ -37,8 +37,3 @@ class PostfixCalculator:
             return left_operand / right_operand
         if operator == "^":
             return left_operand ** right_operand
-
-action_stack = PostfixCalculator()
-expression = "5 ^ 2 * ( 2 + 3 )"
-
-print(action_stack.convert_and_action_expression(expression))
