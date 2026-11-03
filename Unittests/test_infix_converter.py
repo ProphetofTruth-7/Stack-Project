@@ -48,6 +48,10 @@ class TestInfixConverter(unittest.TestCase):
         with self.assertRaises(ValueError):
             expression = "A + B ; C"
             self.test_converter.infix_to_postfix(expression)
+    def test_malformed_3(self):
+        with self.assertRaises(ValueError):
+            expression = "+ A B"
+            self.test_converter.infix_to_postfix(expression)
 
 
 if __name__ == "__main__":
