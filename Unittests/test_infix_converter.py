@@ -52,7 +52,27 @@ class TestInfixConverter(unittest.TestCase):
         with self.assertRaises(ValueError):
             expression = "+ A B"
             self.test_converter.infix_to_postfix(expression)
-
+    def test_malformed_4(self):
+        with self.assertRaises(ValueError):
+            expression = "A + * B"
+            self.test_converter.infix_to_postfix(expression)
+    def test_malformed_5(self):
+        with self.assertRaises(ValueError):
+            expression = "A B + C"
+            self.test_converter.infix_to_postfix(expression)
+    def test_malformed_6(self):
+        with self.assertRaises(ValueError):
+            expression = "A + ) B * C ("
+            self.test_converter.infix_to_postfix(expression)
+    def test_malformed_7(self):
+        with self.assertRaises(ValueError):
+            expression = "( A + B"
+            self.test_converter.infix_to_postfix(expression)
+    def test_malformed_8(self):
+        with self.assertRaises(ValueError):
+            expression = "A + B )"
+            self.test_converter.infix_to_postfix(expression)
+            
 
 if __name__ == "__main__":
     unittest.main()
